@@ -1,0 +1,39 @@
+{
+     "name": "deployment",
+     "version": "0.1.0",
+     "bin": {
+          "deployment": "bin/deployment.js"
+     },
+     "scripts": {
+          "start": "npm install --legacy-peer-deps && npm-run-all build deploy",
+          "check-deploy": "sh deploy.sh",
+          "build": "tsc",
+          "build:authorizer": "cd ../../ts-common-authorizer/src/ && npm install",
+          "install-lambda": "cd ../lambda && sh npmInstall.sh",
+          "build-lambda": "cd ../lambda && sh npmInstallandBuild.sh",
+          "test-ut": "cd ../lambda && sh testUT.sh",
+          "clean": "rm -rf *.js && rm -rf *d.ts && rm -rf node_modules && && rm -rf cdk.out",
+          "destroy": "cdk destroy",
+          "deploy": "cdk deploy --all --require-approval never",
+          "output": "npx ts-node --prefer-ts-exts outputFileGenerator.ts"
+     },
+     "devDependencies": {
+          "@types/jest": "^29.5.11",
+          "@types/node": "20.11.6",
+          "aws-cdk": "2.124.0",
+          "esbuild": "^0.21.5",
+          "jest": "^29.7.0",
+          "ts-jest": "^29.1.2",
+          "ts-node": "^10.9.2",
+          "typescript": "~5.3.3"
+     },
+     "dependencies": {
+          "@aws-sdk/client-cloudformation": "^3.596.0",
+          "@aws-sdk/client-s3": "^3.679.0",
+          "@cny-common/aws.cdk.ts": "^0.0.53",
+          "@cny-helpers/nodejs": "^0.0.10",
+          "aws-cdk-lib": "2.124.0",
+          "constructs": "^10.0.0",
+          "fs-extra": "^11.2.0"
+     }
+}
